@@ -29,7 +29,7 @@ module Appfigures
       self.connection.get("sales/products+dates/#{start_date}/#{end_date}").body.map do |id, hash|
         Hashie::Mash.new({
           'product_id' => hash['id'],
-          'series' => hash.map |date, data| { Hashie::Mash.new({'date' => date, 'downloads' => data['downloads']}) }
+          'series' => hash.map { |date, data| Hashie::Mash.new({'date' => date, 'downloads' => data['downloads']}) }
         })
       end
     end
