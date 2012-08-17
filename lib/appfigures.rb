@@ -10,8 +10,8 @@ require 'appfigures/sales'
 module Appfigures
   class << self
     def connection(options = {})
-      return @connection unless options[:user] && options[:password]
-      @connection = Appfigures::Connection.new(options[:user], options[:password])
+      return @@connection unless options[:user] && options[:password]
+      @@connection = Appfigures::Connection.new(options[:user], options[:password])
     end
 
     def sales

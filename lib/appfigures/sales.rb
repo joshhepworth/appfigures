@@ -5,7 +5,7 @@ module Appfigures
       @connection = Appfigures.connection
     end
 
-    def product_sales
+    def products
       self.connection.get('sales/products').body.map do |id, hash|
         Hashie::Mash.new({
           'product_id'      => hash['product']['id'],
@@ -25,10 +25,11 @@ module Appfigures
     end
 
     # GET /sales/products+dates/2010-05-20/2010-05-25
-    def product_date_sales(start_date, end_date)
-      self.connection.get('sales/products+dates/2010-05-20/2010-05-25').body.map do |id, hash|
+    def products_dates(start_date, end_date)
+      self.connection.get("sales/products+dates/#{start_date}/#{end_date}").body.map do |id, hash|
         Hashie::Mash.new({
-
+          'product_id' => hash['id'],
+          'series' => hash.map |date, data| { Hashie::Mash.new({'date' => date, 'downloads' => data['downloads']}) }
         })
       end
     end
