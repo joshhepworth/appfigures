@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    appfigures (0.1.2)
+    appfigures (0.1.3)
       faraday
       faraday_middleware
       hashie
