@@ -1,9 +1,4 @@
-require 'faraday'
-require 'faraday_middleware'
-require 'multi_json'
-require 'hashie'
-
-class Appfigures
+module Appfigures
   class Connection < Faraday::Connection
     def initialize(username, password)
       super('https://api.appfigures.com/v1.1/') do |builder|

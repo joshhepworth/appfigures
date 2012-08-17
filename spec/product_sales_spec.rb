@@ -45,49 +45,50 @@ describe Appfigures do
         }
       }
       EOF
-      @api = Appfigures.new username: 'test', password: 'test'
+      Appfigures.connection user: 'test', password: 'test'
+      Appfigures.connection.adapter :test, @stubs
+
       @stubs = Faraday::Adapter::Test::Stubs.new do |stub|
         stub.get('/v1.1/sales/products') { [status_code, headers, body] }
       end
-      @api.connection.adapter :test, @stubs
   end
 
   it 'returns a product ID' do
-    expect(@api.product_sales.first.product_id).to eq(123123)
+    expect(@appfigures.product_sales.first.product_id).to eq(123123)
   end
 
   it 'returns a store ID' do
-    expect(@api.product_sales.first.store_id).to eq(0)
+    expect(@appfigures.product_sales.first.store_id).to eq(0)
   end
   it 'returns a store name' do
-    expect(@api.product_sales.first.store_name).to eq('apple')
+    expect(@appfigures.product_sales.first.store_name).to eq('apple')
   end
   it 'returns a name' do
-    expect(@api.product_sales.first.name).to eq('Test App')
+    expect(@appfigures.product_sales.first.name).to eq('Test App')
   end
   it 'returns a sku' do
-    expect(@api.product_sales.first.sku).to eq('TEST_APP')
+    expect(@appfigures.product_sales.first.sku).to eq('TEST_APP')
   end
   it 'returns a download count' do
-    expect(@api.product_sales.first.downloads).to eq(29)
+    expect(@appfigures.product_sales.first.downloads).to eq(29)
   end
   it 'returns a return count' do
-    expect(@api.product_sales.first.returns).to eq(3)
+    expect(@appfigures.product_sales.first.returns).to eq(3)
   end
   it 'returns an update count' do
-    expect(@api.product_sales.first.updates).to eq(50)
+    expect(@appfigures.product_sales.first.updates).to eq(50)
   end
   it 'returns a net download count' do
-    expect(@api.product_sales.first.net_downloads).to eq(26)
+    expect(@appfigures.product_sales.first.net_downloads).to eq(26)
   end
   it 'returns a promo count' do
-    expect(@api.product_sales.first.promos).to eq(1)
+    expect(@appfigures.product_sales.first.promos).to eq(1)
   end
   it 'returns a gift redemption count' do
-    expect(@api.product_sales.first.gift_redemptions).to eq(10)
+    expect(@appfigures.product_sales.first.gift_redemptions).to eq(10)
   end
   it 'returns a revenue number' do
-    expect(@api.product_sales.first.revenue).to eq(100.99)
+    expect(@appfigures.product_sales.first.revenue).to eq(100.99)
   end
 
 end

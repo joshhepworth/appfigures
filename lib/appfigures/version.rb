@@ -1,3 +1,3 @@
-class Appfigures
-  VERSION = "0.0.1"
+module Appfigures
+  VERSION = "0.1.0"
 end
